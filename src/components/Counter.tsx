@@ -4,6 +4,7 @@ type Props = {
   title: string;
 };
 
+// SetupFnとdefinePropsで共通化したいが、definePropsがインラインで型を渡さないと怒られる
 export const Counter: SetupFC<Props> = () => {
   const props = defineProps<{ title: string }>();
 
