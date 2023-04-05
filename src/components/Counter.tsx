@@ -1,9 +1,11 @@
 import { ref } from "vue";
 
-const Counter = defineSetupComponent(() => {
-  const props = defineProps<{
-    title: string;
-  }>();
+type Props = {
+  title: string;
+};
+
+export const Counter: SetupFC<Props> = () => {
+  const props = defineProps<{ title: string }>();
 
   const count = ref(0);
 
@@ -15,14 +17,17 @@ const Counter = defineSetupComponent(() => {
     count.value--;
   };
 
-  return () => (
+  const CounterChild = () => (
     <div>
-      <h1>{props.title}</h1>
       <button onClick={decrement}>-</button>
       <span>{count.value}</span>
       <button onClick={increment}>+</button>
     </div>
   );
-});
-
-export default Counter;
+  return () => (
+    <>
+      <h1>{props.title}</h1>
+      <CounterChild />
+    </>
+  );
+};
